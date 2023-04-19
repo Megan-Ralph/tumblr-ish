@@ -2,4 +2,8 @@
 
 <p><%= @article.body %></p>
 
+<% if @article.user == current_user || current_user.admin? %>
+  <%= link_to "Edit Article", edit_article_path(@article) %> |
+<% end %>
+
 <%= link_to "Home", root_path %>

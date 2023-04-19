@@ -1,3 +1,15 @@
 <h1>Hello <%= @user.email %></h1>
 
 <h3>Activity Feed...</h3>
+
+<div class="post-wrapper"> 
+  <% @posts.each do |post| %>
+    <% if post.instance_of?(::Article) %>
+      <%= render 'article', article: post %>
+    <% elsif post.instance_of?(::Event) %>
+      <%= render 'event', event: post %>
+    <% end %>
+  <% end %>
+</div>
+
+<%= link_to "Home", root_path %>

@@ -17,7 +17,7 @@ gem "devise"
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem 'rspec-rails', '~> 3.5'
-  gem 'factory_bot'
+  gem 'factory_bot_rails'
   gem 'capybara'
 end
 
@@ -28,4 +28,5 @@ end
 group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
+  gem "faker"
 end

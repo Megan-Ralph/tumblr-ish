@@ -1,14 +1,19 @@
 require 'rails_helper'
  
-feature 'Homepage Visit' do
+feature 'Visit Homepage' do
 
-  scenario 'without a user' do
+  scenario 'while not logged in' do
     visit(root_path) 
     expect(page).to have_content 'Log in'
   end
 
-  scenario 'logged in user' do
+  scenario 'while logged in' do
+    @user = create(:user)
+    @article = create(:article)
+    login_as(@user)
+
     visit(root_path)
     expect(page).to have_content 'Home'
+    expect(page).to have_content 'Worlds best MMO!'
   end
 end

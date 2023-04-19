@@ -9,4 +9,5 @@ Rails.application.routes.draw do
 
   resources :articles
   resources :events
+  resources :users, only: :show
 end

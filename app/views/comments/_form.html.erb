@@ -1,4 +1,3 @@
-<h3>Comment on post...</h3>
 <%= form_with(model: comment, local: true) do |form| %>
   <%= form.hidden_field :commentable_type, value: comment.commentable_type %>
   <%= form.hidden_field :commentable_id, value: comment.commentable_id %>

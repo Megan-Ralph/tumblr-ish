@@ -4,4 +4,10 @@
   <p>Start: <%= event.start_date %></p>
   <p>End: <%= event.end_date %></p>
   <span><%= event.created_at %></span>
+
+  <% event.comments.each do |comment| %>
+    <p><%= comment.body %> - <%= comment.user&.email %></p>
+  <% end %>
+
+  <%= render 'comments/form', comment: event.comments.new %>
 </div>

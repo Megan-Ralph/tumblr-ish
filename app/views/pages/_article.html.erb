@@ -2,4 +2,10 @@
   <h3><%= link_to article.title, article_path(article) %></h3>
   <p><%= article.body %></p>
   <span><%= article.created_at %></span>
+
+  <% article.comments.each do |comment| %>
+    <p><%= comment.body %> - <%= comment.user&.email %></p>
+  <% end %>
+
+  <%= render 'comments/form', comment: article.comments.new %>
 </div>

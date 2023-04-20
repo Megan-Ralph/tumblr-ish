@@ -18,4 +18,10 @@ FactoryBot.define do
     end_date { DateTime.now + 4.hours }
     user_id { 1 }
   end
+
+  factory :comment do
+    body { "This is a comment!" }
+    association :commentable, factory: :article
+    association :user
+  end
 end

@@ -29,4 +29,5 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
   gem "faker"
+  gem "rails-controller-testing"
 end

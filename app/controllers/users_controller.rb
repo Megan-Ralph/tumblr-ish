@@ -3,7 +3,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @posts = (@user.articles + @user.events).sort_by(&:created_at)
 
-    @acitivity = (@user.articles + @user.events + @user.comments).sort_by(&:created_at).take(10)
+    @acitivities = @user.activity_feed
   end
 
   def index

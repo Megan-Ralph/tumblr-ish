@@ -1,21 +1,15 @@
 <h1>Hello <%= @user.email %></h1>
 
-<h3>Activity Feed...</h3>
-<% @acitivity.each do |activity| %>
-  <% if activity.instance_of?(::Comment) %>
-    <p>Created comment on 
-      <% if activity.commentable_type == "Article" %>
-        <%= link_to "Artical - #{ activity.commentable.title }", article_path(activity.commentable) %>
-      <% elsif activity.commentable_type == "Event" %>
-        <%= link_to "Event - #{ activity.commentable.title }", event_path(activity.commentable) %>
-      <% end %>
-    </p>
-    <span><%= activity.created_at.strftime("%Y-%m-%d") %></span>
-  <% else %>
-    <p>Created <%= link_to "#{ activity.class.name } - #{ activity.title }", polymorphic_path(activity) %></p>
-    <span><%= activity.created_at.strftime("%Y-%m-%d") %></span>
+<h3>Activity Feed</h3>
+<ul>
+  <% @acitivities.each do |activity| %>
+    <% if activity.class.name == "Comment" %>
+      <li>Comment created on <%= link_to "#{activity.commentable_type} - #{ activity.commentable.title }", polymorphic_path(activity) %></li>
+    <% else %>
+      <li>Created <%= link_to "#{activity.type} - #{activity.title || activity.name}", polymorphic_path(activity) %></li>
+    <% end %>
   <% end %>
-<% end %>
+</ul>
 
 <div class="post-wrapper"> 
   <% @posts.each do |post| %>

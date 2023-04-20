@@ -34,6 +34,20 @@ RSpec.describe UsersController, type: :controller do
         expect(response.body).to include("Hello")
       end
 
+      it "displays the user's activity feed" do
+        user = FactoryBot.create(:user)
+
+        FactoryBot.create_list(:article, 5, user: user)
+        FactoryBot.create_list(:event, 3, user: user)
+        FactoryBot.create_list(:comment, 2, commentable: FactoryBot.create(:article, user: user), user: user)
+        sign_in user
+
+        get :show, params: { id: user.id }
+
+        expect(user.activity_feed.count).to eq(10)
+        expect(response).to render_template(:show)
+      end
+
       it "displays posts created by user" do
         user = FactoryBot.create(:user)
         article = FactoryBot.create(:article, user_id: user.id)

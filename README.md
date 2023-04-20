@@ -1,24 +1,16 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+*Disclaimer* - I made this app quickly & for fun, many things can be improved! I wanted to build the bulk and then write some specs if I had time.
 
-Things you may want to cover:
+* Ruby version - 3.1.2
+* Rails version - 7.0.4
 
-* Ruby version
+Runs like any simple rails app with devise authentication :-)
 
-* System dependencies
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Stuff I'd like to add:
+* Styles and layout
+* More types of posts and some kind of filtering
+* Comment threads
+* Comment likes (or reactions?)
+* Better specs

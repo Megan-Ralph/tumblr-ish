@@ -10,7 +10,12 @@ Rails.application.routes.draw do
 
   root "pages#home"
 
-  resources :articles
-  resources :events
+  resources :articles do
+    resources :comments, only: [:create, :destroy], defaults: { commentable_type: 'Article'}
+  end
+  resources :events do 
+    resources :comments, only: [:create, :destroy], defaults: { commentable_type: 'Event'}
+  end
   resources :users, only: :show
+  resources :comments
 end

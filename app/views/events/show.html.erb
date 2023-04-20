@@ -4,8 +4,14 @@
 <p><%= @event.start_date %></p>
 <p><%= @event.end_date %></p>
 
-<% if @article.user == current_user || current_user.admin? %>
-  <%= link_to "Edit Article", edit_article_path(@article) %> |
+<% @event.comments.each do |comment| %>
+  <p><%= comment.body %> - <%= comment.user&.email %></p>
+<% end %>
+
+<%= render 'comments/form', comment: @event.comments.new %>
+
+<% if @event.user == current_user || current_user.admin? %>
+  <%= link_to "Edit Event", edit_event_path(@event) %> |
 <% end %>
 
 <%= link_to "Home", root_path %>

@@ -1,6 +1,8 @@
 class EventsController < ApplicationController
   def show
     @event = Event.find(params[:id])
+    @commentable = @event
+    @comment = @commentable.comments.build
   end
 
   def new

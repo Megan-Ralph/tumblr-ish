@@ -1,6 +1,8 @@
 class ArticlesController < ApplicationController
   def show
     @article = Article.find(params[:id])
+    @commentable = @article
+    @comment = @commentable.comments.build
   end
 
   def new

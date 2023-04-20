@@ -16,6 +16,6 @@ Rails.application.routes.draw do
   resources :events do 
     resources :comments, only: [:create, :destroy], defaults: { commentable_type: 'Event'}
   end
-  resources :users, only: :show
+  resources :users, only: [:show, :index]
   resources :comments
 end

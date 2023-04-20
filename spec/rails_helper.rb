@@ -32,6 +32,10 @@ require 'support/factory_bot'
 RSpec.configure do |config|
   config.use_transactional_fixtures = false
   config.include Warden::Test::Helpers
+  config.include Warden::Test::Helpers, type: :controller
+  config.include Capybara::DSL
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.render_views = true
 
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and

@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
   def show
-    @user = current_user
-    @posts = (Article.all.where(user: current_user) + Event.all.where(user: current_user)).sort_by(&:created_at)
+    @user = User.find(params[:id])
+    @posts = (Article.all.where(user: @user) + Event.all.where(user: @user)).sort_by(&:created_at)
+  end
+
+  def index
+    @users = User.all
   end
 end

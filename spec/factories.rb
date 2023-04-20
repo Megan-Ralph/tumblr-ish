@@ -10,4 +10,12 @@ FactoryBot.define do
     body { "Final Fantasy XIV because blah blah" }
     user_id { 1 }
   end
+
+  factory :event do
+    title { "Fan Fest!" }
+    body { "Event body blah blah" }
+    start_date { DateTime.now }
+    end_date { DateTime.now + 4.hours }
+    user_id { 1 }
+  end
 end

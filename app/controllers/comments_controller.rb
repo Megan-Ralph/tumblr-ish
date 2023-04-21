@@ -5,9 +5,13 @@ class CommentsController < ApplicationController
     @comment.user = current_user
 
     if @comment.save
-      redirect_to @commentable, notice: "Commented!"
+      respond_to do |format|
+        format.js { render 'create.js.erb' }
+      end
     else
-      render :new
+      respond_to do |format|
+        format.js { render 'create.js.erb' }
+      end
     end
   end
 

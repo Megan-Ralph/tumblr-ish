@@ -1,4 +1,4 @@
-<%= form_with(model: comment, local: true, class: "row g-3") do |form| %>
+<%= form_with(model: comment, remote: true, class: "row g-3") do |form| %>
   <%= form.hidden_field :commentable_type, value: comment.commentable_type %>
   <%= form.hidden_field :commentable_id, value: comment.commentable_id %>
 

@@ -9,9 +9,13 @@
   <ul class="list-group">
     <% @acitivities.each do |activity| %>
       <% if activity.class.name == "Comment" %>
-        <li class="list-group-item">Comment created on <%= link_to "#{activity.commentable_type} - #{ activity.commentable.title }", polymorphic_path(activity) %></li>
+        <li class="list-group-item">
+          Comment created on <%= link_to "#{activity.activity_title}", activity.article? ? article_path(activity) : event_path(activity) %>
+        </li>
       <% else %>
-        <li class="list-group-item">Created <%= link_to "#{activity.type} - #{activity.title || activity.name}", polymorphic_path(activity) %></li>
+        <li class="list-group-item">
+          Created <%= link_to "#{activity.type} - #{activity.title || activity.name}", polymorphic_path(activity) %>
+        </li>
       <% end %>
     <% end %>
   </ul>

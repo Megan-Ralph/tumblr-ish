@@ -1,1 +1,14 @@
-$('#comments').append("<%= escape.javascript(render @comment) %>");
+<% if @comment.persisted? %>
+  var commentableId = '<%= params[:comment][:commentable_id] %>';
+  var commetableType = '<%= params[:comment][:commentable_type] %>';
+
+  var commentSectionSelector = '#comments-' + commentableType.toLowerCase() + '-' + commetableId;
+
+  var commentBody = '<%= j render @comment %>';
+
+  $(commentSectionSelector).appent(commentBody);
+
+  $('.comment-form').trigger('reset');
+<% else %>
+  alert('<%= escape_javascript(render 'errors', object: @comment) %>');
+<% end %>

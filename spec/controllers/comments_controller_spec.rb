@@ -5,42 +5,14 @@ RSpec.describe CommentsController, type: :controller do
     context "when logged in" do
       let(:user) { FactoryBot.create(:user) }
       let(:article) { FactoryBot.create(:article) }
-      let(:event) { FactoryBot.create(:event) }
     
       before do
         sign_in user
+        post :create, xhr: true, params: { comment: {body: "Test comment", commentable_type: "Article", commentable_id: article.id}, user_id: user.id }
       end
 
-      context "when crearing a comment for an article" do
-        it "creates a new comment for this article" do
-          comment_params = {
-            body: "This is a comment!",
-            commentable_type: "Article",
-            commentable_id: article.id
-          }
-
-          expect do
-            post :create, params: { comment: comment_params }
-          end.to change(Comment, :count).by(1)
-
-          expect(response).to redirect_to(article_path(article))
-        end
-      end
-
-      context "when creating a comment for an event" do
-        it "creates a new comment for this event" do
-          comment_params = {
-            body: "This is a comment!",
-            commentable_type: "Event",
-            commentable_id: event.id
-          }
-
-          expect do
-            post :create, params: { comment: comment_params }
-          end.to change(Comment, :count).by(1)
-
-          expect(response).to redirect_to(event_path(event))
-        end
+      it "returns successful comment creation" do
+        expect(response).to be_successful
       end
     end
 

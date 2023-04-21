@@ -6,11 +6,11 @@ class CommentsController < ApplicationController
 
     if @comment.save
       respond_to do |format|
-        format.js { render 'create.js.erb' }
+        format.js
       end
     else
       respond_to do |format|
-        format.js { render 'create.js.erb' }
+        format.js
       end
     end
   end

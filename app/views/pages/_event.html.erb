@@ -5,12 +5,12 @@
 <p>Created on: <%= event.created_at.strftime("%d.%m.%Y") %></p>
 <hr class="my-4">
 
+
 <p>Comments</p>
-  <% event.comments.each do |comment| %>
-    <p>
-      <%= comment.body %> - <%= comment.user&.email %> - <%= comment.created_at.strftime("%d.%m.%Y") %>
-    </p>
-  <% end %>
+<% event.comments.each do |comment| %>
+  <%= render 'comments/comment', comment: comment %>
+<% end %>
+
 
   <%= render 'comments/form', comment: event.comments.new %>
 <hr class="my-4">

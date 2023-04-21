@@ -1,10 +1,11 @@
-<%= form_with(model: comment, remote: true, class: "row g-3") do |form| %>
+<%= form_with(model: comment, remote: true, class: "comment-form row g-3") do |form| %>
   <%= form.hidden_field :commentable_type, value: comment.commentable_type %>
   <%= form.hidden_field :commentable_id, value: comment.commentable_id %>
 
-  <div class="col-auto">
+  <div class="form-actions col-auto">
     <%= form.text_field :body, class: "form-control", placeholder: "Type Here..." %>
   </div>
+
   <div class="col-auto">
     <%= form.submit "Add comment", class: "btn btn-primary mb-3" %>
   </div>

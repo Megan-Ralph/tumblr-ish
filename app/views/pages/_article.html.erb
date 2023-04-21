@@ -4,11 +4,9 @@
 <hr class="my-4">
 
 <p>Comments</p>
-  <% article.comments.each do |comment| %>
-    <p>
-      <%= comment.body %> - <%= comment.user&.email %> - <%= comment.created_at.strftime("%d.%m.%Y") %>
-    </p>
-  <% end %>
+<% article.comments.each do |comment| %>
+  <%= render 'comments/comment', comment: comment %>
+<% end %>
 
-  <%= render 'comments/form', comment: article.comments.new %>
+<%= render 'comments/form', comment: article.comments.new %>
 <hr class="my-4">

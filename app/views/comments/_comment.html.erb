@@ -1,0 +1,3 @@
+<div id="comments-<%= comment.class.to_s.downcase %>-<%= comment.id %>">
+  <p><%= comment.body %> - <%= comment.user&.email %> - <%= comment.created_at.strftime("%d.%m.%Y") %></p>
+</div>

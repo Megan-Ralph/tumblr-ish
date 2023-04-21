@@ -1,13 +1,16 @@
-<div class="post">
-  <h3><%= link_to event.title, event_path(event) %></h3>
-  <p><%= event.body %></p>
-  <p>Start: <%= event.start_date %></p>
-  <p>End: <%= event.end_date %></p>
-  <span><%= event.created_at %></span>
+<h3 class="display-6"><%= link_to event.title, event_path(event) %></h3>
+<p class="lead"><%= event.body %></p>
+<p class="lead">Start: <%= event.start_date.strftime("%d.%m.%Y") %></p>
+<p class="lead">End: <%= event.end_date.strftime("%d.%m.%Y") %></p>
+<p>Created on: <%= event.created_at.strftime("%d.%m.%Y") %></p>
+<hr class="my-4">
 
+<p>Comments</p>
   <% event.comments.each do |comment| %>
-    <p><%= comment.body %> - <%= comment.user&.email %></p>
+    <p>
+      <%= comment.body %> - <%= comment.user&.email %> - <%= comment.created_at.strftime("%d.%m.%Y") %>
+    </p>
   <% end %>
 
   <%= render 'comments/form', comment: event.comments.new %>
-</div>
+<hr class="my-4">

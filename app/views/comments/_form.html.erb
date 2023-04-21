@@ -1,8 +1,11 @@
-<%= form_with(model: comment, local: true) do |form| %>
+<%= form_with(model: comment, local: true, class: "row g-3") do |form| %>
   <%= form.hidden_field :commentable_type, value: comment.commentable_type %>
   <%= form.hidden_field :commentable_id, value: comment.commentable_id %>
 
-  <%= form.text_area :body %>
-
-  <%= form.submit "Add comment" %>
+  <div class="col-auto">
+    <%= form.text_field :body, class: "form-control", placeholder: "Type Here..." %>
+  </div>
+  <div class="col-auto">
+    <%= form.submit "Add comment", class: "btn btn-primary mb-3" %>
+  </div>
 <% end %>

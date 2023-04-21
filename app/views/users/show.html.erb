@@ -1,24 +1,29 @@
-<h1>Hello <%= @user.email %></h1>
+<div class="container">
+  <h1>Hello <%= @user.email %></h1>
+  <hr class="my-4">
+</div>
 
-<h3>Activity Feed</h3>
-<ul>
-  <% @acitivities.each do |activity| %>
-    <% if activity.class.name == "Comment" %>
-      <li>Comment created on <%= link_to "#{activity.commentable_type} - #{ activity.commentable.title }", polymorphic_path(activity) %></li>
-    <% else %>
-      <li>Created <%= link_to "#{activity.type} - #{activity.title || activity.name}", polymorphic_path(activity) %></li>
+<div class="container">
+  <p class="h5">Activity Feed</p>
+
+  <ul class="list-group">
+    <% @acitivities.each do |activity| %>
+      <% if activity.class.name == "Comment" %>
+        <li class="list-group-item">Comment created on <%= link_to "#{activity.commentable_type} - #{ activity.commentable.title }", polymorphic_path(activity) %></li>
+      <% else %>
+        <li class="list-group-item">Created <%= link_to "#{activity.type} - #{activity.title || activity.name}", polymorphic_path(activity) %></li>
+      <% end %>
     <% end %>
-  <% end %>
-</ul>
+  </ul>
+  <hr class="my-4">
+</div>
 
-<div class="post-wrapper"> 
+<div class="container">
   <% @posts.each do |post| %>
     <% if post.instance_of?(::Article) %>
-      <%= render 'article', article: post %>
+      <%= render 'pages/article', article: post %>
     <% elsif post.instance_of?(::Event) %>
-      <%= render 'event', event: post %>
+      <%= render 'pages/event', event: post %>
     <% end %>
   <% end %>
 </div>
-
-<%= link_to "Home", root_path %>

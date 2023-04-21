@@ -1,9 +1,12 @@
-<h1>Home</h1>
+<div class="container">
+  <h1>Home</h1>
 
-<%= link_to "New Article", new_article_path %> |
-<%= link_to "New Event", new_event_path %>
+  <%= link_to "New Article", new_article_path, class: "btn btn-outline-dark" %>
+  <%= link_to "New Event", new_event_path, class: "btn btn-outline-dark" %>
+  <hr class="my-4">
+</div>
 
-<div class="post-wrapper"> 
+<div class="container">
   <% @posts.each do |post| %>
     <% if post.instance_of?(::Article) %>
       <%= render 'article', article: post %>

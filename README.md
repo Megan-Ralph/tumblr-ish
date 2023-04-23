@@ -9,8 +9,10 @@ Runs like any simple rails app with devise authentication :-)
 
 
 Stuff I'd like to add:
-* Styles and layout
 * More types of posts and some kind of filtering
 * Comment threads
 * Comment likes (or reactions?)
 * Better specs
+
+Entity-Relationshop Diagram:
+[erd.pdf](https://github.com/Megan-Ralph/tumblr-ish/files/11303681/erd.pdf)

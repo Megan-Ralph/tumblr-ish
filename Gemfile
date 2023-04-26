@@ -32,4 +32,5 @@ group :test do
   gem "webdrivers"
   gem "faker"
   gem "rails-controller-testing"
+  gem "shoulda-matchers"
 end

@@ -7,14 +7,16 @@
   <p class="h5">Activity Feed</p>
 
   <ul class="list-group">
-    <% @acitivities.each do |activity| %>
-      <% if activity.class.name == "Comment" %>
+    <% @activities.each do |activity| %>
+      <% if activity[:type] == "Comment" %>
         <li class="list-group-item">
-          Comment created on <%= link_to "#{activity.activity_title}", activity.article? ? article_path(activity) : event_path(activity) %>
+          Comment created on 
+          <%= link_to "#{activity[:commentable_type]} - #{activity[:commentable_id]}", polymorphic_path([activity[:commentable_type].constantize.find(activity[:commentable_id])]) %>
         </li>
       <% else %>
         <li class="list-group-item">
-          Created <%= link_to "#{activity.type} - #{activity.title || activity.name}", polymorphic_path(activity) %>
+          Created 
+          <%= link_to "#{activity[:type]} - #{activity[:title]}", polymorphic_path(activity[:type].constantize.find(activity[:id])) %>
         </li>
       <% end %>
     <% end %>

@@ -1,6 +1,9 @@
 <h1><%= @article.title %></h1>
+<p>Created by <%= @article.user.email %></p>
+<hr class="my-4">
 
 <p><%= @article.body %></p>
+<hr class="my-4">
 
 <% @article.comments.each do |comment| %>
   <p><%= comment.body %> - <%= comment.user&.email %></p>
@@ -8,8 +11,21 @@
 
 <%= render 'comments/form', comment: @article.comments.new %>
 
-<% if @article.user == current_user || current_user.admin? %>
-  <%= link_to "Edit Article", edit_article_path(@article) %> |
+<% if @article.user == current_user %>
+  <%= link_to "Edit Article", edit_article_path(@article) %>
 <% end %>
 
-<%= link_to "Home", root_path %>
+<hr class="my-4">
+
+<div>
+  <% if current_user.admin? %>
+    <p class="h5">Admin Actions</p>
+
+    <%= link_to "Edit Article", edit_article_path(@article), class: "btn btn-outline-danger" %>
+
+    <%= link_to "Delete Article", article_path(@article), data: {
+                  turbo_method: :delete,
+                  turbo_confirm: "Are you sure?"
+                }, class: "btn btn-outline-danger" %>
+  <% end %>
+</div>

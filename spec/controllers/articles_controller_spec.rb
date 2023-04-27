@@ -38,4 +38,26 @@ RSpec.describe ArticlesController, type: :controller do
       end
     end
   end
+
+  describe "DELETE #destroy" do
+    let(:article) { create(:article) }
+
+    context "when user is an admin" do
+      before do
+        sign_in create(:user, admin: true)
+      end
+
+      it "deletes the article and its comments" do
+        comment1 = create(:comment, commentable: article)
+        comment2 = create(:comment, commentable: article)
+
+        expect {
+          delete :destroy, params: { id: article.id }
+        }.to change(Article, :count).by(-1)
+        .and change(Comment, :count).by(-2)
+
+        expect(response).to redirect_to(root_path)
+      end
+    end
+  end
 end

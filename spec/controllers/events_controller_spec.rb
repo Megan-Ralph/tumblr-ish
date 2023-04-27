@@ -42,4 +42,26 @@ RSpec.describe EventsController, type: :controller do
       end
     end
   end
+
+  describe "DELETE #destroy" do
+    let(:event) { create(:event) }
+
+    context "when user is an admin" do
+      before do
+        sign_in create(:user, admin: true)
+      end
+
+      it "deletes the event and its comments" do
+        comment1 = create(:comment, commentable: event)
+        comment2 = create(:comment, commentable: event)
+
+        expect {
+          delete :destroy, params: { id: event.id }
+        }.to change(Event, :count).by(-1)
+        .and change(Comment, :count).by(-2)
+
+        expect(response).to redirect_to(root_path)
+      end
+    end
+  end
 end

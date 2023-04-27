@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
       end
     end
   end
-
+  
   private
 
   def find_commentable

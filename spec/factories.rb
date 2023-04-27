@@ -25,4 +25,9 @@ FactoryBot.define do
     association :commentable, factory: :article
     association :user
   end
+
+  factory :like do
+    association :likeable, factory: :article
+    association :user
+  end
 end

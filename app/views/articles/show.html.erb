@@ -9,8 +9,14 @@
   Edited by admin at <%= @article.edited_at.strftime("%d.%m.%Y") %>
 <% end %>
 
+<%= render 'likes/form', like: @article.likes.new %>
+<hr class="my-4">
+
+
 <% @article.comments.each do |comment| %>
   <p><%= comment.body %> - <%= comment.user&.email %></p>
+  <%= render 'likes/form', like: comment.likes.new %>
+  <hr class="my-4">
 <% end %>
 
 <%= render 'comments/form', comment: @article.comments.new %>

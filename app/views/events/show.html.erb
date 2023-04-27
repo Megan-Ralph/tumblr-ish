@@ -11,8 +11,13 @@
   Edited by admin at <%= @event.edited_at.strftime("%d.%m.%Y") %>
 <% end %>
 
+<%= render 'likes/form', like: @event.likes.new %>
+<hr class="my-4">
+
 <% @event.comments.each do |comment| %>
   <p><%= comment.body %> - <%= comment.user&.email %></p>
+  <%= render 'likes/form', like: comment.likes.new %>
+  <hr class="my-4">
 <% end %>
 
 <%= render 'comments/form', comment: @event.comments.new %>

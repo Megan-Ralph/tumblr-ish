@@ -3,8 +3,6 @@ class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
 
   def show
-    @commentable = @article
-    @comment = @commentable.comments.build
   end
 
   def new

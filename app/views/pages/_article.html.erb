@@ -3,9 +3,14 @@
 <p>Created on: <%= article.created_at.strftime("%d.%m.%Y") %></p>
 <hr class="my-4">
 
+<%= render 'likes/form', like: article.likes.new %>
+<hr class="my-4">
+
 <p>Comments</p>
 <% article.comments.each do |comment| %>
   <%= render 'comments/comment', comment: comment %>
+  <%= render 'likes/form', like: comment.likes.new %>
+  <hr class="my-4">
 <% end %>
 
 <%= render 'comments/form', comment: article.comments.new %>

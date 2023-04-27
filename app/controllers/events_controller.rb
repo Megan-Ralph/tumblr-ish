@@ -3,8 +3,6 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
   def show
-    @commentable = @event
-    @comment = @commentable.comments.build
   end
 
   def new

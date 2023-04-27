@@ -1,0 +1,14 @@
+<%= form_with(model: like, remote: true, class: "like-form") do |form| %>
+  <%= form.hidden_field :likeable_type, value: like.likeable_type %>
+  <%= form.hidden_field :likeable_id, value: like.likeable_id %>
+
+  <div class="row g-3">
+    <div class="col-auto">
+      <%= form.submit "Like", class: "btn btn-primary" %>
+    </div>
+    
+    <div class="col-auto">
+      <p><span class="like-count">Likes: <%= like.likeable.likes.count %></span></p>
+    </div>
+  </div>
+<% end %>

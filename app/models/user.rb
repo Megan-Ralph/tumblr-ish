@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :articles
   has_many :events
   has_many :comments
+  has_many :likes
 
   def activity_feed
     query = <<-SQL

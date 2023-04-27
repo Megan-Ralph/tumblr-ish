@@ -5,6 +5,10 @@
 <p><%= @article.body %></p>
 <hr class="my-4">
 
+<% if @article.edited_by_admin? %>
+  Edited by admin at <%= @article.edited_at.strftime("%d.%m.%Y") %>
+<% end %>
+
 <% @article.comments.each do |comment| %>
   <p><%= comment.body %> - <%= comment.user&.email %></p>
 <% end %>

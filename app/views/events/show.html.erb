@@ -3,9 +3,13 @@
 <hr class="my-4">
 
 <p><%= @event.body %></p>
-<p>Start date: <%= @event.start_date %></p>
-<p>End date: <%= @event.end_date %></p>
+<p>Start date: <%= @event.start_date.strftime("%d.%m.%Y") %></p>
+<p>End date: <%= @event.end_date.strftime("%d.%m.%Y") %></p>
 <hr class="my-4">
+
+<% if @event.edited_by_admin? %>
+  Edited by admin at <%= @event.edited_at.strftime("%d.%m.%Y") %>
+<% end %>
 
 <% @event.comments.each do |comment| %>
   <p><%= comment.body %> - <%= comment.user&.email %></p>

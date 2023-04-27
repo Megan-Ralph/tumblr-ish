@@ -9,6 +9,7 @@ FactoryBot.define do
     title { "Worlds best MMO!" }
     body { "Final Fantasy XIV because blah blah" }
     user_id { 1 }
+    edited_by_admin { false }
   end
 
   factory :event do

@@ -60,4 +60,55 @@ RSpec.describe ArticlesController, type: :controller do
       end
     end
   end
+
+  describe "GET #edit" do
+    context "when user is not the author of the article" do
+      let(:user) { create(:user) }
+      let(:article) { create(:article) }
+
+      before do
+        sign_in user
+      end
+
+      it "redirects to root path and displays alert message" do
+        get :edit, params: { id: article.id }
+        expect(response).to redirect_to(root_path)
+        expect(flash[:alert]).to eq("You are not authorised to perform this action.")
+      end
+    end
+  end
+
+  describe "PUT #update" do
+    context "when user is an admin" do
+      let(:admin) { create(:user, admin: true) }
+      let(:user) { create(:user) }
+      let(:article) { create(:article, user: user) }
+
+      before do
+        sign_in admin
+      end
+
+      it "updates the article and the admin fields" do
+        put :update, params: { id: article.id, article: { body: "Brand new article body!" } }
+        expect(article.reload.body).to eq("Brand new article body!")
+        expect(article.reload.edited_by_admin).to eq(true)
+        expect(article.reload.edited_by).to eq(admin.id)
+      end
+    end
+
+    context "when user is not an admin but is the author" do
+      let(:user) { create(:user) }
+      let(:article) { create(:article, user: user) }
+
+      before do
+        sign_in user
+      end
+
+      it "updates the article and not the admin fields" do
+        put :update, params: { id: article.id, article: { body: "Brand new article body!" } }
+        expect(article.reload.body).to eq("Brand new article body!")
+        expect(article.reload.edited_by_admin).to eq(false)
+      end
+    end
+  end
 end

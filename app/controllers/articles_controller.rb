@@ -1,6 +1,8 @@
 class ArticlesController < ApplicationController
+  before_action :authorise_user, only: [:edit, :update]
+  before_action :set_article, only: [:show, :edit, :update, :destroy]
+
   def show
-    @article = Article.find(params[:id])
     @commentable = @article
     @comment = @commentable.comments.build
   end
@@ -20,11 +22,14 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    @article = Article.find(params[:id])
   end
 
   def update
-    @article = Article.find(params[:id])
+    if current_user.admin? && @article.user != current_user
+      @article.edited_by_admin = true
+      @article.edited_by = current_user.id
+      @article.edited_at = DateTime.now
+    end
 
     if @article.update(article_params)
       redirect_to @article
@@ -34,7 +39,6 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    @article = Article.find(params[:id])
     @article.destroy
 
     redirect_to root_path, alert: "Deleted"
@@ -42,7 +46,20 @@ class ArticlesController < ApplicationController
 
   private
 
+  def set_article
+    @article = Article.find(params[:id])
+  end
+
+  def authorise_user
+    @article = Article.find(params[:id])
+
+    unless current_user.admin? || @article.user == current_user
+      flash[:alert] = "You are not authorised to perform this action."
+      redirect_to root_path
+    end
+  end
+
   def article_params
-    params.require(:article).permit(:title, :body, :user_id).merge(user: current_user)
+    params.require(:article).permit(:title, :body, :edited_by_admin, :edited_by, :edited_at, :user_id).merge(user: current_user)
   end
 end

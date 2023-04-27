@@ -1,1 +1,16 @@
-$("#like-count").text("<%= @likeable.likes.count %>")
+$(document).on('click', '.like-button', function(event) {
+  event.preventDefault();
+
+  var button = $(this);
+  $.ajax({
+    url: button.attr('href'),
+    type: 'POST',
+    dataType: 'json',
+    success: function(response) {
+      var likeCount = button.closest('.like-form').find('.like-count');
+      likeCount.text(response.likes_count);
+    },
+  });
+
+  return false;
+});
